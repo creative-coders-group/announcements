@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Bizness",
+    "sap": [
+      "Ishlab chiqarish",
+      "Xizmat ko'rsatish",
+      "Tijorat",
+      "Xalqaro Bizness",
+      "Startap"
+    ],
+    "count": 25
+  },
+  {
+    "name": "Dizayn",
+    "sap": ["Web Dizayn", "Grafik Dizayn", "Moushin Grafika", "Logo Brend"],
+    "count": 12
+  },
+  {
+    "name": "Dasturlash",
+    "sap": ["Backend", "Frontend", "Fullstack", "Foundation"],
+    "count": 23
+  },
+  {
+    "name": "Ta'lim",
+    "sap": ["Kimyo", "Fizika", "Astranomiya", "Adabiyot", "Tarix"],
+    "count": 15
+  },
+  {
+    "name": "Sport",
+    "sap": ["Tennis", "Shaxmat", "Box", "UFS", "Kiber-Sport"],
+    "count": 11
+  },
+  {
+    "name": "Til",
+    "sap": [
+      "Ingliz tili",
+      "Rus tili",
+      "Fransuz tili",
+      "Nemis tili",
+      "Koreys tili"
+    ],
+    "count": 22
+  },
+  {
+    "name": "Kino",
+    "sap": ["Hayoliy", "Hayotiy", "Tarixiy", "Ertak", "Melodramma"],
+    "count": 21
+  },
+  {
+    "name": "San'at",
+    "sap": [
+      "Rassomchilik",
+      "Xaykaltaroshlik",
+      "Musiqa",
+      "Teatr",
+      "Aktyorlik",
+      "Qiziqchilik"
+    ],
+    "count": 16
+  },
+  {
+    "name": "Sou-Bizness",
+    "sap": ["Konsert", "Primeriya", "Piar", "Ko'rsatuv"],
+    "count": 14
+  },
+  {
+    "name": "Tibbiyot",
+    "sap": ["Davolash", "Jarroxlik", "Muolaja", "Salomatlik"],
+    "count": 12
+  },
+  {
+    "name": "Taqdimot",
+    "sap": ["Elektronika", "Dastur", "Kino", "Maxsulot"],
+    "count": 10
+  },
+  {
+    "name": "Sayohat",
+    "sap": [
+      "Dunyo-Bo'ylab",
+      "Mamlakat",
+      "Tarixiy obidalar",
+      "Ulkan-Shaharlar",
+      "Dengiz"
+    ],
+    "count": 15
+  }
+]

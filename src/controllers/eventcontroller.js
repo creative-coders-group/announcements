@@ -5,7 +5,7 @@ import Joi from "joi";
 const GET = async (req, res) => {
   let events = await fs.readFile("./src/database/json/events.json", "utf-8");
 
-  events = JSON.parse(events);
+  events = events ? JSON.parse(events) : [];
   if (req.params.eventId) {
     return res.json(events.find((e) => e.eve_id == req.params.eventId));
   }
@@ -46,7 +46,7 @@ const GET = async (req, res) => {
       let m = new Date(date);
       let j = new Date(event.eve_date);
       return (
-        event.eve_type == eve_type &&
+        // event.eve_type == eve_type &&
         event.sub_category == sub_category &&
         m.getFullYear() == j.getFullYear() &&
         m.getMonth() == j.getMonth() &&
@@ -62,8 +62,12 @@ const GET = async (req, res) => {
     for (let i = 0; i < events.length; i++) {
       let j = new Date(events[i].eve_date),
         m = new Date();
-      if (j < m || events[i].status == "rejected") {
-        await fs.unlink("./src/database/image/" + events[i].eve_pic);
+      if (j < m) {
+        try {
+          await fs.unlink("./src/database/image/" + events[i].eve_pic);
+        } catch (error) {
+          console.log(error);
+        }
         events.splice(i, 1);
       }
     }
@@ -75,6 +79,10 @@ const GET = async (req, res) => {
     events = events.filter((event) => event.status == "accepted");
     res.json(events.slice((page - 1) * limit, page * limit));
     return;
+  }
+
+  if (tab == "admin") {
+    res.json(events);
   }
 
   events = events.filter((event) => {
@@ -136,7 +144,7 @@ const POST = async (req, res) => {
   for (const j of events) {
     if (j.eve_id > eve_id) eve_id = j.eve_id;
   }
-  eve_id = eve_id ? 1 : eve_id + 1;
+  eve_id = eve_id ? eve_id + 1 : 1;
   let newEvent = {
     eve_id,
     user_id,
@@ -189,13 +197,11 @@ const POST = async (req, res) => {
     {
       gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] },
     },
-    function (error, completed, statistic) {
+    async function (error, completed, statistic) {
       console.log(error);
+      await fs.unlink("./src/database/" + req.file.originalname);
     }
   );
-  setTimeout(async () => {
-    await fs.unlink("./src/database/" + req.file.originalname);
-  }, 10000);
   res.json(newEvent);
 };
 
@@ -211,7 +217,7 @@ const PUT = async (req, res) => {
       "./src/database/json/categories.json",
       "utf-8"
     );
-    categories = categories ? JSON.parse(categories) : {};
+    categories = categories ? JSON.parse(categories) : [];
     let categorie = categories.find((e) => e.name == category);
     categorie.count += 1;
     await fs.writeFile(

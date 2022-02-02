@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import compress_images from "compress-images";
 import Joi from "joi";
-import e from "express";
 
 const GET = async (req, res) => {
   let events = await fs.readFile("./src/database/json/events.json", "utf-8");
@@ -64,6 +63,7 @@ const GET = async (req, res) => {
       let j = new Date(events[i].eve_date),
         m = new Date();
       if (j < m || events[i].status == "rejected") {
+        await fs.unlink("./src/database/image/" + events[i].eve_pic);
         events.splice(i, 1);
       }
     }
@@ -202,7 +202,7 @@ const POST = async (req, res) => {
 const PUT = async (req, res) => {
   let events = await fs.readFile("./src/database/json/events.json", "utf-8");
   events = events ? JSON.parse(events) : [];
-  let { eve_id, status, category, sub_category } = req.body;
+  let { eve_id, status, category } = req.body;
 
   let j = events.find((e) => e.eve_id == eve_id);
   j.status = status;
@@ -212,7 +212,8 @@ const PUT = async (req, res) => {
       "utf-8"
     );
     categories = categories ? JSON.parse(categories) : {};
-    categories[category][sub_category] += 1;
+    let categorie = categories.find((e) => e.name == category);
+    categorie.count += 1;
     await fs.writeFile(
       "./src/database/json/categories.json",
       JSON.stringify(categories, null, 2)

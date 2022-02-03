@@ -83,8 +83,8 @@ const GET = async (req, res) => {
     return;
   }
 
-  if ("admin search".includes(tab)) {
-    res.json(events);
+  if (tab == "search" || tab == "admin") {
+    return res.json(events);
   }
 
   events = events.filter((event) => {

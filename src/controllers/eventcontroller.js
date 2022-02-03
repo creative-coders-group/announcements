@@ -106,7 +106,7 @@ const GET = async (req, res) => {
 const POST = async (req, res) => {
   let events = await fs.readFile("./src/database/json/events.json", "utf-8");
   events = events ? JSON.parse(events) : [];
-
+  console.log(req.body);
   const schema = Joi.object({
     eve_id: Joi.number(),
     user_id: Joi.number().required(),
@@ -147,64 +147,93 @@ const POST = async (req, res) => {
     if (j.eve_id > eve_id) eve_id = j.eve_id;
   }
   eve_id = eve_id ? eve_id + 1 : 1;
-  let newEvent = {
-    eve_id,
-    user_id,
-    userName,
-    userFamily,
-    tel,
-    profession,
-    category,
-    sub_category,
-    eve_name,
-    eve_pic: req.file.originalname,
-    eve_info_little,
-    eve_info_full,
-    eve_type,
-    eve_location,
-    eve_date,
-    status: "pending",
-    view_count: 0,
-  };
+  let newEvent;
+  try {
+    newEvent = {
+      eve_id,
+      user_id,
+      userName,
+      userFamily,
+      tel,
+      profession,
+      category,
+      sub_category,
+      eve_name,
+      eve_pic: req.file.originalname,
+      eve_info_little,
+      eve_info_full,
+      eve_type,
+      eve_location,
+      eve_date,
+      status: "pending",
+      view_count: 0,
+    };
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: 501,
+      message: error,
+    });
+  }
 
   try {
-    const value = await schema.validateAsync(newEvent);
+    let value;
+    try {
+      value = await schema.validateAsync(newEvent);
+    } catch (error) {
+      console.log(error);
+      return res.json({
+        status: 501,
+        message: error,
+      });
+    }
     let index = events.findIndex((e) => e.eve_date > eve_date);
-    console.log(index);
-    if (index == -1) events.push(value);
-    else events.splice(index, 0, value);
+    if (index == -1 && value) events.push(value);
+    else if (value) events.splice(index, 0, value);
     await fs.writeFile(
       "./src/database/json/events.json",
       JSON.stringify(events, null, 2)
     );
   } catch (err) {
-    res.json({
+    console.log(err);
+    return res.json({
       status: 501,
-      message: err,
+      message: error,
+    });
+  }
+  try {
+    await fs.writeFile(
+      "./src/database/" + req.file.originalname,
+      req.file.buffer
+    );
+    await compress_images(
+      "./src/database/" + req.file.originalname,
+      "./src/database/image/",
+      { compress_force: false, statistic: true, autoupdate: true },
+      false,
+      { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+      { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+      { svg: { engine: "svgo", command: "--multipass" } },
+      {
+        gif: {
+          engine: "gifsicle",
+          command: ["--colors", "64", "--use-col=web"],
+        },
+      },
+      async function (error, completed, statistic) {
+        console.log(error);
+        await fs.unlink("./src/database/" + req.file.originalname);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: 501,
+      message: error,
     });
   }
 
-  await fs.writeFile(
-    "./src/database/" + req.file.originalname,
-    req.file.buffer
-  );
-  await compress_images(
-    "./src/database/" + req.file.originalname,
-    "./src/database/image/",
-    { compress_force: false, statistic: true, autoupdate: true },
-    false,
-    { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
-    { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
-    { svg: { engine: "svgo", command: "--multipass" } },
-    {
-      gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] },
-    },
-    async function (error, completed, statistic) {
-      console.log(error);
-      await fs.unlink("./src/database/" + req.file.originalname);
-    }
-  );
-  res.json(newEvent);
+  return res.json(newEvent);
 };
 
 const PUT = async (req, res) => {

@@ -1,3 +1,3 @@
 import os from "os";
 
-export default os.networkInterfaces()[`Беспроводная сеть`][1].address;
+export default os.networkInterfaces()[`Wi-Fi`][1].address;

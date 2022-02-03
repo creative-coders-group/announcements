@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import Host from "./src/lib/network.js";
+// import Host from "./src/lib/network.js";
 
 import router from "./src/routes/event.routes.js";
 import routerc from "./src/routes/categories.routes.js";
@@ -18,4 +18,4 @@ app.use("/events", router);
 app.use("/categories", routerc);
 app.use("/admins", routera);
 
-app.listen(PORT, console.log("Listening to " + Host + ":" + PORT));
+app.listen(PORT, console.log("Listening to localhost://" + PORT));

@@ -7,9 +7,17 @@ const GET = async (req, res) => {
 
   events = events ? JSON.parse(events) : [];
   if (req.params.eventId) {
-    let eve = events.find((e) => e.eve_id == req.params.eventId);
-    eve.view_count += 1;
-    return res.json(eve);
+    try {
+      let eve = events.find((e) => e.eve_id == req.params.eventId);
+      eve.view_count += 1;
+      return res.json(eve);
+    } catch (error) {
+      console.log(error);
+      return res.json({
+        status: 501,
+        message: error,
+      });
+    }
   }
   let tab = req.query.tab,
     user_id = req.query.user_id,

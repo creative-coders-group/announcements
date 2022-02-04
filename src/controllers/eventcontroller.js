@@ -89,7 +89,7 @@ const GET = async (req, res) => {
       JSON.stringify(events, null, 2)
     );
     events = events.filter((event) => event.status == "accepted");
-    return res.json(events.slice((page - 1) * limit, page * limit));
+    return res.json(events);
   }
 
   if (tab == "search" || tab == "admin") {

@@ -7,9 +7,9 @@ const GET = async (req, res) => {
 
   events = events ? JSON.parse(events) : [];
   if (req.params.eventId) {
-    let eve = res.json(events.find((e) => e.eve_id == req.params.eventId));
+    let eve = events.find((e) => e.eve_id == req.params.eventId);
     eve.view_count += 1;
-    return eve;
+    return res.json(eve);
   }
   let tab = req.query.tab,
     user_id = req.query.user_id,
@@ -39,8 +39,7 @@ const GET = async (req, res) => {
         });
       }
     }
-    res.json(users);
-    return;
+    return res.json(users);
   }
 
   if (tab == "*") {
@@ -56,8 +55,7 @@ const GET = async (req, res) => {
         event.status == "accepted"
       );
     });
-    res.json(events.slice((page - 1) * limit, page * limit));
-    return;
+    return res.json(events.slice((page - 1) * limit, page * limit));
   }
 
   if (tab == "main") {
@@ -79,8 +77,7 @@ const GET = async (req, res) => {
       JSON.stringify(events, null, 2)
     );
     events = events.filter((event) => event.status == "accepted");
-    res.json(events.slice((page - 1) * limit, page * limit));
-    return;
+    return res.json(events.slice((page - 1) * limit, page * limit));
   }
 
   if (tab == "search" || tab == "admin") {
@@ -242,24 +239,32 @@ const PUT = async (req, res) => {
   let { eve_id, status, category } = req.body;
 
   let j = events.find((e) => e.eve_id == eve_id);
-  j.status = status;
-  if (status == "accepted") {
-    let categories = await fs.readFile(
-      "./src/database/json/categories.json",
-      "utf-8"
-    );
-    categories = categories ? JSON.parse(categories) : [];
-    let categorie = categories.find((e) => e.name == category);
-    categorie.count += 1;
+  j ? (j.status = status) : null;
+  try {
+    if (status == "accepted") {
+      let categories = await fs.readFile(
+        "./src/database/json/categories.json",
+        "utf-8"
+      );
+      categories = categories ? JSON.parse(categories) : [];
+      let categorie = categories.find((e) => e.name == category);
+      categorie.count += 1;
+      await fs.writeFile(
+        "./src/database/json/categories.json",
+        JSON.stringify(categories, null, 2)
+      );
+    }
     await fs.writeFile(
-      "./src/database/json/categories.json",
-      JSON.stringify(categories, null, 2)
+      "./src/database/json/events.json",
+      JSON.stringify(events, null, 2)
     );
+    return res.json(j);
+  } catch (error) {
+    return res.json({
+      status: 501,
+      message: error,
+    });
   }
-  await fs.writeFile(
-    "./src/database/json/events.json",
-    JSON.stringify(events, null, 2)
-  );
 };
 
 export { GET, POST, PUT };

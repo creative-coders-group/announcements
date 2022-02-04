@@ -10,6 +10,10 @@ const GET = async (req, res) => {
     try {
       let eve = events.find((e) => e.eve_id == req.params.eventId);
       eve.view_count += 1;
+      await fs.writeFile(
+        "./src/database/json/events.json",
+        JSON.stringify(events, null, 2)
+      );
       return res.json(eve);
     } catch (error) {
       console.log(error);

@@ -76,9 +76,7 @@ const GET = async (req, res) => {
       if (j < m) {
         try {
           await fs.unlink("./src/database/image/" + events[i].eve_pic);
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
         events.splice(i, 1);
       }
     }
@@ -114,60 +112,51 @@ const GET = async (req, res) => {
 const POST = async (req, res) => {
   let events = await fs.readFile("./src/database/json/events.json", "utf-8");
   events = events ? JSON.parse(events) : [];
-  console.log(req.body);
   const schema = Joi.object({
-    eve_id: Joi.number().error(new Error("Event id son bo'lishi kerak")),
-    user_id: Joi.number()
-      .required()
-      .error(new Error("User id son bo'lishi kerak")),
+    eve_id: Joi.number().label("Event id son bo'lishi kerak"),
+    user_id: Joi.number().required().label("User id son bo'lishi kerak"),
     userName: Joi.string()
       .min(3)
       .max(30)
       .required()
       .alphanum()
-      .error(new Error("Ism 3 va 30 oralig'ida bo'lishi kerak")),
+      .label("Ism 3 va 30 oralig'ida bo'lishi kerak"),
     userFamily: Joi.string()
       .min(3)
       .max(30)
       .required()
       .alphanum()
-      .error(new Error("Familiya 3 va 30 oralig'ida bo'lishi kerak")),
+      .label("Familiya 3 va 30 oralig'ida bo'lishi kerak"),
     tel: Joi.string()
       .min(12)
       .max(12)
       .required()
-      .error(
-        new Error("Telefon 12 ta raqamdan iborat bo'lishi kerak: 90 123 45 67")
-      ),
-    profession: Joi.string().error(new Error("Professiya bor bo'lishi kerak")),
-    category: Joi.string()
-      .required()
-      .error(new Error("Yo'nalish bor bo'lishi kerak")),
+      .label("Telefon 12 ta raqamdan iborat bo'lishi kerak: 90 123 45 67"),
+    profession: Joi.string().label("Professiya bor bo'lishi kerak"),
+    category: Joi.string().required().label("Yo'nalish bor bo'lishi kerak"),
     sub_category: Joi.string()
       .required()
-      .error(new Error("Ichki yo'nalish bor bo'lishi kerak")),
-    eve_pic: Joi.string().error(
-      new Error("Tadbir uchun rasm bor bo'lishi kerak")
-    ),
+      .label("Ichki yo'nalish bor bo'lishi kerak"),
+    eve_pic: Joi.string().label("Tadbir uchun rasm bor bo'lishi kerak"),
     eve_name: Joi.string()
       .min(3)
       .max(50)
       .required()
-      .error(new Error("Tadbirning nomi 3 va 50 oralig'ida bo'lishi kerak")),
+      .label("Tadbirning nomi 3 va 50 oralig'ida bo'lishi kerak"),
     eve_info_little: Joi.string()
       .max(100)
-      .error(new Error("qisqa ma'lumot 100 ta xabardan oshmasligi kerak")),
+      .label("qisqa ma'lumot 100 ta xabardan oshmasligi kerak"),
     eve_info_full: Joi.string()
       .min(30)
       .max(700)
       .required()
-      .error(new Error("To'liq ma'lumot 30 va 700 oralig'ida bo'lishi kerak")),
+      .label("To'liq ma'lumot 30 va 700 oralig'ida bo'lishi kerak"),
     eve_type: Joi.string()
       .allow("online", "offline")
-      .error(new Error("Tadbir turi belgilanishi kerak")),
-    eve_location: Joi.string().error(new Error("Link bor bo'lishi kerak")),
-    eve_link: Joi.string().error(new Error("Link bor bo'lishi kerak")),
-    eve_date: Joi.string().error(new Error("Tadbir sanasi bor bo'lishi kerak")),
+      .label("Tadbir turi belgilanishi kerak"),
+    eve_location: Joi.string().label("Link bor bo'lishi kerak"),
+    eve_link: Joi.string().label("Link bor bo'lishi kerak"),
+    eve_date: Joi.string().label("Tadbir sanasi bor bo'lishi kerak"),
     status: Joi.string(),
     view_count: Joi.number(),
   }).xor("eve_link", "eve_location");
@@ -215,7 +204,6 @@ const POST = async (req, res) => {
       view_count: 0,
     };
   } catch (error) {
-    console.log(error);
     return res.json({
       status: 501,
       message: error,
@@ -227,7 +215,6 @@ const POST = async (req, res) => {
     try {
       value = await schema.validateAsync(newEvent);
     } catch (error) {
-      console.log(error);
       return res.json({
         status: 501,
         message: error,
@@ -241,7 +228,6 @@ const POST = async (req, res) => {
       JSON.stringify(events, null, 2)
     );
   } catch (err) {
-    console.log(err);
     return res.json({
       status: 501,
       message: error,
@@ -267,12 +253,10 @@ const POST = async (req, res) => {
         },
       },
       async function (error, completed, statistic) {
-        console.log(error);
         await fs.unlink("./src/database/" + req.file.originalname);
       }
     );
   } catch (error) {
-    console.log(error);
     return res.json({
       status: 501,
       message: error,

@@ -16,7 +16,6 @@ const GET = async (req, res) => {
       );
       return res.json(eve);
     } catch (error) {
-      console.log(error);
       return res.json({
         status: 501,
         message: error,
@@ -117,22 +116,58 @@ const POST = async (req, res) => {
   events = events ? JSON.parse(events) : [];
   console.log(req.body);
   const schema = Joi.object({
-    eve_id: Joi.number(),
-    user_id: Joi.number().required(),
-    userName: Joi.string().min(3).max(30).required().alphanum(),
-    userFamily: Joi.string().min(3).max(30).required().alphanum(),
-    tel: Joi.string().min(12).max(12).required(),
-    profession: Joi.string(),
-    category: Joi.string().required(),
-    sub_category: Joi.string().required(),
-    eve_pic: Joi.string(),
-    eve_name: Joi.string().min(3).max(50).required(),
-    eve_info_little: Joi.string().max(100),
-    eve_info_full: Joi.string().min(30).max(700).required(),
-    eve_type: Joi.string().allow("online", "offline"),
-    eve_location: Joi.string(),
-    eve_link: Joi.string(),
-    eve_date: Joi.string(),
+    eve_id: Joi.number().error(new Error("Event id son bo'lishi kerak")),
+    user_id: Joi.number()
+      .required()
+      .error(new Error("User id son bo'lishi kerak")),
+    userName: Joi.string()
+      .min(3)
+      .max(30)
+      .required()
+      .alphanum()
+      .error(new Error("Ism 3 va 30 oralig'ida bo'lishi kerak")),
+    userFamily: Joi.string()
+      .min(3)
+      .max(30)
+      .required()
+      .alphanum()
+      .error(new Error("Familiya 3 va 30 oralig'ida bo'lishi kerak")),
+    tel: Joi.string()
+      .min(12)
+      .max(12)
+      .required()
+      .error(
+        new Error("Telefon 12 ta raqamdan iborat bo'lishi kerak: 90 123 45 67")
+      ),
+    profession: Joi.string().error(new Error("Professiya bor bo'lishi kerak")),
+    category: Joi.string()
+      .required()
+      .error(new Error("Yo'nalish bor bo'lishi kerak")),
+    sub_category: Joi.string()
+      .required()
+      .error(new Error("Ichki yo'nalish bor bo'lishi kerak")),
+    eve_pic: Joi.string().error(
+      new Error("Tadbir uchun rasm bor bo'lishi kerak")
+    ),
+    eve_name: Joi.string()
+      .min(3)
+      .max(50)
+      .required()
+      .error(new Error("Tadbirning nomi 3 va 50 oralig'ida bo'lishi kerak")),
+    eve_info_little: Joi.string()
+      .max(100)
+      .error(new Error("qisqa ma'lumot 100 ta xabardan oshmasligi kerak")),
+    eve_info_full: Joi.string()
+      .min(30)
+      .max(700)
+      .required()
+      .error(new Error("To'liq ma'lumot 30 va 700 oralig'ida bo'lishi kerak")),
+    eve_type: Joi.string()
+      .allow("online", "offline")
+      .error(new Error("Tadbir turi belgilanishi kerak")),
+    eve_location: Joi.string().error(new Error("Link bor bo'lishi kerak")),
+    eve_link: Joi.string().error(new Error("Link bor bo'lishi kerak")),
+    eve_date: Joi.string().error(new Error("Tadbir sanasi bor bo'lishi kerak")),
     status: Joi.string(),
     view_count: Joi.number(),
   }).xor("eve_link", "eve_location");
@@ -169,7 +204,9 @@ const POST = async (req, res) => {
       sub_category,
       eve_name,
       eve_pic: req.file.originalname,
-      eve_info_little,
+      eve_info_little: eve_info_little
+        ? eve_info_little
+        : eve_info_full.slice(0, 50),
       eve_info_full,
       eve_type,
       eve_location,

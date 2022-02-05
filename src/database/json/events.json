@@ -1,5 +1,62 @@
 [
   {
+    "eve_id": 26,
+    "user_id": 4,
+    "userName": "Abdumalik",
+    "userFamily": "Shukurov",
+    "tel": "998908666077",
+    "profession": "Tijoratchi",
+    "category": "Bizness",
+    "sub_category": "Tijorat",
+    "eve_name": "Pul birligi",
+    "eve_pic": "meeting1.jpg",
+    "eve_info_little": "Har qancha urinma pulni faqat mehnat bilan topa olmaysan.",
+    "eve_info_full": "lorem ipsum dolor sid amed. truncated pools are now connecting to tons of lost of air fossil and animal extinction. every day a normal human drinks 5 litres of water. this is waste of letters",
+    "eve_type": "ONLINE",
+    "eve_location": "t.me/awisemenonce",
+    "eve_date": "2022-02-07T13:45:00.000Z",
+    "status": "accepted",
+    "view_count": 0
+  },
+  {
+    "eve_id": 28,
+    "user_id": 4,
+    "userName": "Abdulloh",
+    "userFamily": "Abdunazarov",
+    "tel": "998978798987",
+    "profession": "biznesmen",
+    "category": "Bizness",
+    "sub_category": "Tijorat",
+    "eve_name": "Tadbirkorlik",
+    "eve_pic": "Rectangle 1744piccy4.jpg",
+    "eve_info_little": "Har qanday qiyin vaziyatdan foyda bilan chiqish. ",
+    "eve_info_full": "When Spider-Man first appeared in the early 1960s, teenagers in superhero comic books were usually relegated to the role of sidekick to the protagonist. The Spider-Man series broke ground by featuring Peter Parker, a high school student from Queens behind Spider-Man's secret identity and with whose \"self-obsessions with rejection, inadequacy, and loneliness\" young readers could relate",
+    "eve_type": "ONLINE",
+    "eve_location": "t.me/awesome/linky",
+    "eve_date": "2022-02-07T16:30:00.000Z",
+    "status": "accepted",
+    "view_count": 7
+  },
+  {
+    "eve_id": 27,
+    "user_id": 4,
+    "userName": "Abdumalik",
+    "userFamily": "Shukurov",
+    "tel": "998908666077",
+    "profession": "Tijoratchi",
+    "category": "Bizness",
+    "sub_category": "Tijorat",
+    "eve_name": "Oltin qazuvchilar",
+    "eve_pic": "Rectangle 1744piccy.jpg",
+    "eve_info_little": "Nimadir qancha kam bo'lsa shuncha qimmatlidir.",
+    "eve_info_full": "lorem ipsum dolor sid amed. truncated pools are now connecting to tons of lost of air fossil and animal extinction. every day a normal human drinks 5 litres of water. this is waste of letters",
+    "eve_type": "ONLINE",
+    "eve_location": "t.me/awisemenonce",
+    "eve_date": "2022-02-08T14:45:00.000Z",
+    "status": "accepted",
+    "view_count": 0
+  },
+  {
     "eve_id": 3,
     "user_id": 2,
     "userName": "Feruza",
@@ -15,7 +72,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/najottalim",
     "eve_date": "2022-02-10T13:11:00.106Z",
-    "status": "accepted",
+    "status": "rejected",
     "view_count": 1
   },
   {
@@ -110,7 +167,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-02-11T11:00:00.000Z",
-    "status": "pending",
+    "status": "rejected",
     "view_count": 0
   },
   {
@@ -129,7 +186,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-02-19T13:30:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -148,7 +205,7 @@
     "eve_type": "ONLINE",
     "eve_location": "fdsa",
     "eve_date": "2022-02-24T23:52",
-    "status": "pending",
+    "status": "rejected",
     "view_count": 0
   },
   {
@@ -167,7 +224,7 @@
     "eve_type": "ONLINE",
     "eve_location": "fdsa",
     "eve_date": "2022-02-24T23:52",
-    "status": "pending",
+    "status": "rejected",
     "view_count": 0
   },
   {
@@ -186,7 +243,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-01T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -205,7 +262,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-02T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -224,7 +281,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -243,7 +300,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -262,7 +319,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -281,7 +338,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -300,7 +357,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -319,7 +376,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -338,8 +395,8 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
-    "view_count": 0
+    "status": "accepted",
+    "view_count": 1
   },
   {
     "eve_id": 23,
@@ -357,7 +414,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/awisemanonce",
     "eve_date": "2022-03-03T14:20:00.000Z",
-    "status": "pending",
+    "status": "rejected",
     "view_count": 0
   },
   {
@@ -395,7 +452,7 @@
     "eve_type": "online",
     "eve_location": "https://t.me/DavronOFF",
     "eve_date": "2022-03-15T10:30:00.106Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -414,7 +471,7 @@
     "eve_type": "offline",
     "eve_location": "https://t.me/DavronOFF",
     "eve_date": "2022-03-30T10:30:00.106Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -433,7 +490,7 @@
     "eve_type": "ONLINE",
     "eve_location": "https://t.me/SalimjonDev",
     "eve_date": "2022-04-01T13:11:00.106Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   },
   {
@@ -452,7 +509,7 @@
     "eve_type": "OFFLINE",
     "eve_location": "https://t.me/SalimjonDev",
     "eve_date": "2022-04-12T13:11:00.106Z",
-    "status": "pending",
+    "status": "accepted",
     "view_count": 0
   }
 ]
